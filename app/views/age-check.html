@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Are you 65 or older?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["age-check"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["age-check"], href: "#age-check" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "age-check",
+      fieldset: {
+        legend: {
+          text: "Are you 65 or older?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "This service is for people aged 65 and over." },
+      errorMessage: errors["age-check"] if errors else null,
+      value: data["age-check"],
+      items: [
+        { value: "yes", text: "Yes" },
+        { value: "no", text: "No" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
