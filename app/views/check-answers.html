@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Are you 65 or older?" },
+        value: { text: data["age-check"] if data["age-check"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/age-check",
+            text: "Change",
+            visuallyHiddenText: "are you 65 or older?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you find it difficult or impossible to travel to a supermarket on your own?" },
+        value: { text: data["mobility-check"] if data["mobility-check"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/mobility-check",
+            text: "Change",
+            visuallyHiddenText: "do you find it difficult or impossible to travel to a supermarket on your own?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you have someone at home who can help with food shopping?" },
+        value: { text: data["lives-alone"] if data["lives-alone"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/lives-alone",
+            text: "Change",
+            visuallyHiddenText: "do you have someone at home who can help with food shopping?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your full name?" },
+        value: { text: data["full-name"] if data["full-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/full-name",
+            text: "Change",
+            visuallyHiddenText: "what is your full name?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you have any dietary needs or allergies we should know about?" },
+        value: { text: data["dietary-needs"] if data["dietary-needs"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/dietary-needs",
+            text: "Change",
+            visuallyHiddenText: "do you have any dietary needs or allergies we should know about?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
