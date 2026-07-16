@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Do you find it difficult or impossible to travel to a supermarket on your own?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["mobility-check"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["mobility-check"], href: "#mobility-check" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "mobility-check",
+      fieldset: {
+        legend: {
+          text: "Do you find it difficult or impossible to travel to a supermarket on your own?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "This includes people who cannot walk far, use a wheelchair, or have no transport." },
+      errorMessage: errors["mobility-check"] if errors else null,
+      value: data["mobility-check"],
+      items: [
+        { value: "yes", text: "Yes, I cannot get to a supermarket on my own" },
+        { value: "no", text: "No, I can get to a supermarket on my own" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
