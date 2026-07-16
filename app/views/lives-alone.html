@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Do you have someone at home who can help with food shopping?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["lives-alone"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["lives-alone"], href: "#lives-alone" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "lives-alone",
+      fieldset: {
+        legend: {
+          text: "Do you have someone at home who can help with food shopping?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "For example, a partner, family member or carer who lives with you." },
+      errorMessage: errors["lives-alone"] if errors else null,
+      value: data["lives-alone"],
+      items: [
+        { value: "no-support", text: "No, I do not have anyone to help" },
+        { value: "sometimes", text: "Sometimes, but not always" },
+        { value: "yes-support", text: "Yes, I have regular help at home" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
