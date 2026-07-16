@@ -1,0 +1,25 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Get food delivered to your home" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Get food delivered to your home</h1>
+    <p class="govuk-body">This service arranges regular food deliveries for people who cannot get to a supermarket.</p>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Your name and home address</li>
+      <li>Your date of birth</li>
+      <li>A phone number we can contact you on</li>
+      <li>Details of any dietary needs or allergies</li>
+    </ul>
+    <p class="govuk-body">It takes around <strong>10 minutes</strong> to complete.</p>
+    {{ govukButton({
+      text: "Start now",
+      href: "/age-check",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
