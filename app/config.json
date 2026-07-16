@@ -1,0 +1,10 @@
+{
+  "serviceName": "Food delivery for people who need support",
+  "serviceUrl": "/start",
+  "useAuth": false,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}
